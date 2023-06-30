@@ -1,0 +1,71 @@
+<p style="color: green"><%= notice %></p>
+
+
+<table class="table">
+  <tbody>
+    <tr>
+    <td>
+      <div class="d-flex align-items-center">
+      <%= form_with(model: @task) do |form| %>
+  <div>
+
+    <%= form.text_field :title, placeholder: 'Enter todo here'  %>
+  </div>
+
+  <div>
+
+    <%= form.hidden_field :status, value: false%>
+    
+  </div>
+  </td>
+  <div>
+    <%= form.hidden_field :user_id, value: current_user.id%>
+  </div>
+  <td>
+  <div>
+    <%= form.submit %>
+  </div>
+  </td>
+<% end %>
+</tr>
+</tbody>
+</table>
+
+<table class="table">
+  <thead>
+    <tr class="d-flex">
+      <th class="col-mb-1"></th>
+      <th class="col-mb-8"></th>
+      <th class="col-mb-1"></th>
+      <th class="col-mb-1"></th>
+    </tr>
+  <thead>
+  <tbody>
+<% @tasks.each do |task| %>
+    <tr>
+      <td>
+        <div class="d-flex align-items-center">
+          <% if task.status?%>
+            <i class="bi bi-check-circle-fill"></i>
+          <% else %>
+            <i class="bi bi-x-circle"></i>
+          <% end %>
+        </div>
+      </td>
+
+      <td>
+        <p class="fw-normal"><%= task.title %></p>
+      </td>
+      <td>
+      <%= link_to "Edit", edit_task_path(task), class: "btn btn-link btn-sm btn-rounded" %>
+      </td>
+      <td>
+        <%= button_to "Destroy", task, method: :delete, class: "btn btn-link btn-sm btn-rounded", data: { confirm: 'Are you sure?' } %>
+      </td>
+    </tr>
+
+  <% end %>
+    </tbody>
+  </table>
+
+  <%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>

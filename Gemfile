@@ -48,7 +48,9 @@ gem 'simple_form'
 # Bootstrap
 gem 'bootstrap'
 gem 'jquery-rails'
+gem 'bootstrap_icons_rails'
 
+gem 'pagy'
 # Use Sass to process CSS
 # gem "sassc-rails"
 
